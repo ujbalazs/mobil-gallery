@@ -12,10 +12,14 @@
   </ion-row>
 </ion-grid>
 
- <div (swipeleft)="next()" (swiperight)="prev()" *ngIf="showMask" (click)="showMask = false"  class="lightbox" tabindex="0">
-  <ion-title>Tap to close.</ion-title>
-  <div  *ngIf="previewImage" class="lightbox-img" >
-    <img  [src]="currentImage.image">
+ <div [ngClass]="[style]" (click) = "style = 'default';"  class="lightbox" tabindex="0">
+  <div class="lightbox-img" >
+    <ion-slides [options]="slideOpts" #slider >
+      <ion-slide *ngFor="let item of items; let i=index">
+        <img  [src]="item.image">
+      </ion-slide>
+    </ion-slides>
+    
 </div>
 
 </div> 

@@ -68,47 +68,37 @@ export class GalleryComponent implements OnInit {
   ];
 
 
-  previewImage= false;
-  showMask=false;
+  @ViewChild('slider', { static: true }) private slider: IonSlides;
+  style = 'default';
+  showMask = false;
   currentImage;
   currentIndex: number;
-  controls=true;
-  totalImageCount=0;
- 
+  controls = true;
+  totalImageCount = 0;
+
 
   slideOpts = {
-    initialSlide: 0,
+    spaceBetween: 5,
+    centeredSlides: true,
     speed: 400
   };
 
-
   constructor(private route: Router) { }
 
-  ngOnInit() {}
-
-  next(){
-    if(this.currentIndex < this.items.length-1){
-      console.log("sdfsdfsdfsdfsdf")
-    this.currentIndex = this.currentIndex + 1;
-    this.currentImage = this.items[this.currentIndex];}   
-  }
-
-  prev(){
-    if(this.currentIndex > 0){
-    this.currentIndex = this.currentIndex -1;
-    this.currentImage= this.items[this.currentIndex]}
-  }
-  
+  ngOnInit() { }
 
   menu() {
     this.route.navigate(['']);
   }
 
 
-  onPreviewImage(index:number):void{
-    this.showMask=true;
-    this.previewImage=true;
+  onPreviewImage(index: number): void {
+    this.showMask = true;
     this.currentIndex = index;
     this.currentImage = this.items[index];
+    this.style = 'change';
+    this.slider.slideTo(this.currentIndex);
 
-}}
+
+  }
+}

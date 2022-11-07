@@ -9,11 +9,12 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import 'hammerjs';
 import { HammerModule } from '@angular/platform-browser';
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
   declarations: [AppComponent, GalleryComponent, HomePageComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, HammerModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, HammerModule, SwiperModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
