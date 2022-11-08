@@ -52,11 +52,12 @@ ion-slides{
 }
 
   
-.default {
-  visibility: hidden
-}
+.default { 
+    transition: .2s ease-in-out all;
+    visibility:hidden; opacity:0}
   
 .change {
-    visibility: initial;
-  } 
+    visibility:visible; opacity:1}
+
+
   
