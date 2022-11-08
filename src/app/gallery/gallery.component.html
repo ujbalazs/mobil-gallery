@@ -12,11 +12,11 @@
   </ion-row>
 </ion-grid>
 
- <div [ngClass]="[style]" (click) = "style = 'default';"  class="lightbox" tabindex="0">
+ <div [ngClass]="[style]" (swipedown) = "style = 'default'; showMask= false"   class="lightbox" tabindex="0">
   <div class="lightbox-img" >
-    <ion-slides [options]="slideOpts" #slider >
+    <ion-slides [options]="slideOpts" #slider zoom >
       <ion-slide *ngFor="let item of items; let i=index">
-        <img  [src]="item.image">
+        <img  [src]="item.image" imageViewer>
       </ion-slide>
     </ion-slides>
     

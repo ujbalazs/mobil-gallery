@@ -80,7 +80,10 @@ export class GalleryComponent implements OnInit {
   slideOpts = {
     spaceBetween: 5,
     centeredSlides: true,
-    speed: 400
+    speed: 400,
+    zoom:{
+      maxRatio: 3
+    }
   };
 
   constructor(private route: Router) { }
