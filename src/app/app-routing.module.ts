@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+
 const routes: Routes = [
   {
     path: '',

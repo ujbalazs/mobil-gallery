@@ -11,6 +11,8 @@ import * as Hammer from 'hammerjs';
 import { HammerModule } from '@angular/platform-browser';
 import { SwiperModule } from 'swiper/angular';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { Camera } from '@ionic-native/camera/ngx/index';
+import { HttpClientModule } from '@angular/common/http';
 
 
 export class HammerConfig extends HammerGestureConfig {
@@ -21,11 +23,11 @@ export class HammerConfig extends HammerGestureConfig {
 
 @NgModule({
   declarations: [AppComponent, GalleryComponent, HomePageComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, HammerModule, SwiperModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, {
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: HammerConfig
-  }],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, HammerModule, SwiperModule,HttpClientModule],
+  providers: [Camera,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+    { provide: HAMMER_GESTURE_CONFIG,useClass: HammerConfig }
+],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

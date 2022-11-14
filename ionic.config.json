@@ -1,7 +1,9 @@
 {
   "name": "mobil-gallery",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
+    
   },
   "type": "angular"
 }
