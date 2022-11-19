@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-gallery',
@@ -10,7 +11,7 @@ import { IonSlides } from '@ionic/angular';
 export class GalleryComponent implements OnInit {
 
   items = [
-    {
+   /* {
       image: "assets/images/car.jpg"
     },
     {
@@ -63,7 +64,7 @@ export class GalleryComponent implements OnInit {
     },
     {
       image: "assets/images/car.jpg"
-    },
+    },*/
 
   ];
 
@@ -86,9 +87,9 @@ export class GalleryComponent implements OnInit {
     }
   };
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, public photoService: PhotoService) {}
 
-  ngOnInit() { }
+  ngOnInit() {this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos});}
 
   menu() {
     this.route.navigate(['']);

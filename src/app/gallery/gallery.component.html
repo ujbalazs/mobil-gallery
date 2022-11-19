@@ -7,7 +7,7 @@
 <ion-grid>
   <ion-row scrollY="true">
   <ion-col size="6" *ngFor="let item of items; let i=index">
-    <ion-img id="img" (click)="onPreviewImage(i)" [src]="item.image"></ion-img>
+    <ion-img id="img" (click)="onPreviewImage(i)" [src]="item.webviewPath"></ion-img>
   </ion-col>
   </ion-row>
 </ion-grid>
@@ -16,7 +16,7 @@
   <div class="lightbox-img" >
     <ion-slides [options]="slideOpts" #slider zoom >
       <ion-slide *ngFor="let item of items; let i=index">
-        <img  [src]="item.image" imageViewer>
+        <img  [src]="item.webviewPath" imageViewer>
       </ion-slide>
     </ion-slides>
     
