@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 import { IonSlides } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
@@ -10,64 +11,9 @@ import { PhotoService } from '../services/photo.service';
 })
 export class GalleryComponent implements OnInit {
 
-  items = [
-   /* {
-      image: "assets/images/car.jpg"
-    },
-    {
-      image: "assets/images/city.jpeg"
-    },
-    {
-      image: "assets/images/mountain.jpg"
-    },
-    {
-      image: "assets/images/city.jpeg"
-    },
-    {
-      image: "assets/images/mountain.jpg"
-    },
-    {
-      image: "assets/images/car.jpg"
-    },
-    {
-      image: "assets/images/city.jpeg"
-    },
-    {
-      image: "assets/images/mountain.jpg"
-    },
-    {
-      image: "assets/images/car.jpg"
-    },
-    {
-      image: "assets/images/car.jpg"
-    },
-    {
-      image: "assets/images/city.jpeg"
-    },
-    {
-      image: "assets/images/mountain.jpg"
-    },
-    {
-      image: "assets/images/city.jpeg"
-    },
-    {
-      image: "assets/images/mountain.jpg"
-    },
-    {
-      image: "assets/images/car.jpg"
-    },
-    {
-      image: "assets/images/city.jpeg"
-    },
-    {
-      image: "assets/images/mountain.jpg"
-    },
-    {
-      image: "assets/images/car.jpg"
-    },*/
+  items = [];
 
-  ];
-
+  itemsToDelete;
 
   @ViewChild('slider', { static: true }) private slider: IonSlides;
   style = 'default';
@@ -89,10 +35,30 @@ export class GalleryComponent implements OnInit {
 
   constructor(private route: Router, public photoService: PhotoService) {}
 
-  ngOnInit() {this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos});}
+  ngOnInit() {this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos});
+  this.itemsToDelete = localStorage.getItem('CapacitorStorage.photos')}
 
   menu() {
     this.route.navigate(['']);
+  }
+
+  del(e) {
+  let name = e.filepath
+  const obj = JSON.parse(this.itemsToDelete);
+  for(var i = 0; i < obj.length; i++){
+    if(obj[i].filepath == name){
+      obj.splice(i, 1) 
+    }
+  }
+  const json = JSON.stringify(obj); 
+  localStorage.setItem('CapacitorStorage.photos', json);
+
+
+  this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos})
+  this.itemsToDelete = localStorage.getItem('CapacitorStorage.photos')
+  if(JSON.parse(this.itemsToDelete).length === 0){
+    location.reload()
+  }
   }
 
 

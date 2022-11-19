@@ -16,6 +16,7 @@
   <div class="lightbox-img" >
     <ion-slides [options]="slideOpts" #slider zoom >
       <ion-slide *ngFor="let item of items; let i=index">
+        <button id = "button" (click)="del(item)" ><ion-icon name="trash-outline"></ion-icon></button>
         <img  [src]="item.webviewPath" imageViewer>
       </ion-slide>
     </ion-slides>
