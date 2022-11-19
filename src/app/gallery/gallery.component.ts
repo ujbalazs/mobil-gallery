@@ -13,8 +13,6 @@ export class GalleryComponent implements OnInit {
 
   items = [];
 
-  itemsToDelete;
-
   @ViewChild('slider', { static: true }) private slider: IonSlides;
   style = 'default';
   showMask = false;
@@ -35,28 +33,16 @@ export class GalleryComponent implements OnInit {
 
   constructor(private route: Router, public photoService: PhotoService) {}
 
-  ngOnInit() {this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos});
-  this.itemsToDelete = localStorage.getItem('CapacitorStorage.photos')}
+  ngOnInit() {this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos});}
 
   menu() {
     this.route.navigate(['']);
   }
 
-  del(e) {
-  let name = e.filepath
-  const obj = JSON.parse(this.itemsToDelete);
-  for(var i = 0; i < obj.length; i++){
-    if(obj[i].filepath == name){
-      obj.splice(i, 1) 
-    }
-  }
-  const json = JSON.stringify(obj); 
-  localStorage.setItem('CapacitorStorage.photos', json);
-
-
-  this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos})
-  this.itemsToDelete = localStorage.getItem('CapacitorStorage.photos')
-  if(JSON.parse(this.itemsToDelete).length === 0){
+  del(e, i) {
+  this.photoService.deletePicture(e, i)
+  this.photoService.loadSaved().finally(()=>{this.items = this.photoService.photos});
+  if(this.items.length === 0){
     location.reload()
   }
   }
